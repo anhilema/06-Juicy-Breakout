@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Ball.gd" type="Script" id=1]
 
@@ -9,8 +9,30 @@ bounce = 1.0
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )
 
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.488889, 1 )
+colors = PoolColorArray( 0.642317, 0.97485, 1, 1, 0.0730479, 0.500315, 1, 1, 0.734375, 0, 1, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.396567 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 80.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 10.0
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
+
 [node name="Ball" type="RigidBody2D"]
-editor/display_folded = true
 position = Vector2( 544, 488 )
 mode = 2
 physics_material_override = SubResource( 1 )
@@ -31,3 +53,12 @@ margin_bottom = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+scale = Vector2( 50, 50 )
+amount = 50
+lifetime = 0.5
+local_coords = false
+process_material = SubResource( 7 )
+
+[node name="Particles2D2" type="Particles2D" parent="."]

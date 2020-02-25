@@ -17,5 +17,7 @@ func _physics_process(delta):
 	
 	if position.y > get_viewport().size.y:
 		Game.change_lives(-1)
+		$Particles2D2.emitting = true
+		$Particles2D2.position = position
 		Starting.startCountdown(3)
 		queue_free()
